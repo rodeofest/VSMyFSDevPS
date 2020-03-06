@@ -1,0 +1,165 @@
+.header-logo{
+	padding-bottom: 20px;
+}
+.header-comp {
+    background-color:#003366;
+	padding:20px 0 0 20px;
+}
+.title{
+    width: 100%;
+    text-align: center;
+}
+.title h1{
+    font-size: 18px;
+    font-family: sans-serif;
+}
+.subSection{
+    background-color: #cccccc; 
+    padding-left: 10px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+.subSection h2{
+    font-weight: regular;
+    font-size: 16px;
+    font-family: sans-serif;
+}
+hr{
+    border-color: #cccccc;
+}
+p{
+    font-family: sans-serif;
+}
+.account {
+	float:right;
+	padding-top:25px;
+	padding-right: 15px;
+}
+.account svg{
+	fill: white;
+}
+.login {
+	color:white;
+	padding: 10px;
+}
+.highlighter {
+    height: 2px;
+    background-color: #fcba19;
+}
+a.siteTitle{
+	font-size: x-large;
+	color: white;
+	text-decoration: none;
+	padding: 15px;
+}
+.centered
+{
+	max-width: 1140px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.menu a{
+    display: block;
+    background-color: white;
+    border: solid #d0d0d1 0.5px;
+    color: #494949;
+    text-decoration: none;
+}
+.menu a:hover{
+    background-color: #d0d0d1;
+}
+.hamburger{
+	display: none;
+
+}
+@media (min-width:801px){    
+    .menu{
+        position: absolute;
+        display: block;
+        right:0px;
+        z-index:100;
+    }
+}
+@media (min-width:1180px){    
+    .menu{
+        right:20px;
+    }
+}
+@media (min-width:1220px){    
+    .menu{
+        right:40px;
+    }
+}
+@media (min-width:1260px){    
+    .menu{
+        right:60px;
+    }
+}
+@media (min-width:1300px){    
+    .menu{
+        right:80px;
+    }
+}
+@media (min-width:1340px){    
+    .menu{
+        right:100px;
+    }
+}
+@media (min-width:1380px){    
+    .menu{
+        right:120px;
+    }
+}
+@media (min-width:1420px){    
+    .menu{
+        right:140px;
+    }
+}
+@media (min-width:1460px){    
+    .menu{
+        right:160px;
+    }
+}
+@media (min-width:1500px){    
+    .menu{
+        right:180px;
+    }
+}
+@media (min-width:1540px){    
+    .menu{
+        right:200px;
+    }
+}
+@media (min-width:1580px){    
+    .menu{
+        right:220px;
+    }
+}
+@media (min-width:1620px){    
+    .menu{
+        right:240px;
+    }
+}
+@media (min-width:1660px){    
+    .menu{
+        right:260px;
+    }
+}
+@media (min-width:1700px){    
+    .menu{
+        right:280px;
+    }
+}
+@media (max-width:800px){
+    .siteTitle, .accountDesktop {
+        display:none;
+    }
+    .menu{
+        position: relative;
+    	float:none;
+    }
+    .hamburger{
+    	display: block;
+    }
+}

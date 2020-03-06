@@ -1,0 +1,73 @@
+<apex:page controller="MCFD_PDFGenerator" renderAs="PDF" >
+
+	<apex:stylesheet value="{!$Resource.MCFD_DocumentChecklistStyle}"/>
+
+
+	<header>
+        <div class="header-comp">
+            <div class="centered">
+                <a><img class="header-logo" src="{!$Resource.bc_logo}" title="BC government logo"/></a>
+            </div>
+        </div>
+        <div class="highlighter"></div>
+    </header>  
+
+    <apex:form >
+
+	  	<div class="title"><h1 class="title">{!$Label.CCS_Checklist_Title}</h1></div>
+
+		  	<p><b>Contact Name: </b>{!contactName}</p>
+			<p><b>Service Request Number: </b>{!requestNum}</p>
+			<p><b>Submitted Date: </b>{!submittedDate}</p>
+
+		<apex:pageBlock rendered="{!documentsProvided.size > 0}">
+		  	<div class="subSection"><h2>{!$Label.CCS_Checklist_Header1}</h2></div>
+		  	<div class="subSectionContent">
+		  		<apex:repeat value="{!documentsProvided}" var="document" id="provided">
+		  			<p><img src="/img/checkbox_checked.gif"/>{!document.MCFD_Attachment_Name__c}<br/></p>
+		  		</apex:repeat>
+
+		  	</div>
+		</apex:pageBlock>
+
+	  	<apex:pageBlock rendered="{!documentsOnFile.size > 0}">
+		  	<div class="subSection"><h2>{!$Label.CCS_Checklist_Header2}</h2></div>
+		  	<div class="subSectionContent">
+		  		<apex:repeat value="{!documentsOnFile}" var="document" id="onFile">
+		  			<p><img src="/img/checkbox_checked.gif"/>{!document.MCFD_Attachment_Name__c}<br/></p>
+		  		</apex:repeat>
+		  	</div>
+		</apex:pageBlock>
+
+
+		<apex:pageBlock rendered="{!documentsRequired.size > 0}">
+		  	<div class="subSection"><h2>{!$Label.CCS_Checklist_Header3}</h2></div>
+		  	<div class="subSectionContent">
+		  		<apex:repeat value="{!documentsRequired}" var="document" id="required">
+		  			<p><img src="/img/checkbox_unchecked.gif"/><span style="color:red">* </span>{!document.MCFD_Attachment_Name__c}<br/></p>
+		  		</apex:repeat>
+
+		  		<apex:repeat value="{!documentsSupporting}" var="document" id="supporting">
+		  			<p><img src="/img/checkbox_unchecked.gif"/>{!document.MCFD_Attachment_Name__c}<br/></p>
+		  		</apex:repeat>
+		  	
+		  		<p><span style="color:red">* </span>{!$Label.CCS_Checklist_DocsOutstanding_Info}</p>
+		  	</div>
+		</apex:pageBlock>
+
+		<apex:pageBlock rendered="{!additionalDocumentsProvided.size > 0}">
+		  	<div class="subSection"><h2>{!$Label.CCS_Checklist_Header4}</h2></div>
+		  	<div class="subSectionContent">
+		  		<apex:repeat value="{!additionalDocumentsProvided}" var="document" id="additional">
+		  			<p>{!document.Name}<br/></p>
+		  		</apex:repeat>
+		  	</div>
+		</apex:pageBlock>
+
+	  	<hr/>
+
+	  	<p>{!$Label.CCS_Checklist_EndOfDoc_Info}</p>
+
+	</apex:form>
+
+</apex:page>

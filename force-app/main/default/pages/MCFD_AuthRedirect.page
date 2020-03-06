@@ -1,0 +1,16 @@
+<apex:page id="communitiesAuthPage" controller="MCFD_AuthenticationController" title="Authentication Redirect" action="{!evaluateAssertion}">
+    <apex:define name="body">  
+        <center>
+            <apex:form id="theForm" forceSSL="true">
+                <apex:pageMessages id="error"/>
+                <h1>An error has occured</h1>
+                <p>There was a problem processing your request. Please try again.</p>
+                <p>
+                    <apex:outputText value="Error: {!error}" escape="false"/>
+                </p>
+                <br/>
+            </apex:form>
+        </center>
+        <br/>
+    </apex:define>
+</apex:page>

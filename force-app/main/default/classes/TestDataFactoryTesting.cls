@@ -1,0 +1,60 @@
+@isTest
+public class TestDataFactoryTesting {
+    static testMethod void initializeChangePasswordController(){
+            Test.startTest();
+            TestDataFactory.initializeChangePasswordController('Test', 'Test', 'Test2');
+            TestDataFactory.initializeCommunitiesSelfRegController('Automated', 'Process', 'rsandoval@00d41000002fwrsea0' ,'Lily','testabc', 'testabc');
+            Account objAccount=TestDataFactory.createAccount('Deepak Community Account');
+            insert objAccount;
+            Contact objContact = TestDataFactory.createContact('Sumra CommunitySumra Community', objAccount.Id, '', 'Deepak');
+            insert objContact;
+            Contact objContactAd = TestDataFactory.createContact2('Sumra CommunitySumra Community', objAccount.Id, '', 'Deepak');
+            Profile objProfile=TestDataFactory.getProfile('Customer Community Plus Login User');
+            User objUser = TestDataFactory.createUser(objContact, objProfile, 'standarduser@testorg.com', '7C01518C8CBD48ED93C10918BD554321');
+            insert objUser;
+            TestDataFactory.getIncome(objContact.id);
+            TestDataFactory.createContactShare(objContact, objUser);
+            TestDataFactory.createPortalSettings('Test','Test',ObjUser);
+            TestDataFactory.createPortalSSORedirection();
+            TestDataFactory.createMessages(5);
+            TestDataFactory.createSpouse();
+            TestDataFactory.createChild();
+            RecordType objRecordType = TestDataFactory.getRecordType('Request__c', 'Application');
+            Request__c objRequest = TestDataFactory.createRequest(objUser, objRecordType,'Travel, Training, Equipment, and Supplies');
+            insert objRequest;
+            TestDataFactory.createSubReq_PositiveAmtChange(objRequest.id);
+            TestDataFactory.createSubReq_NegativeAmtChange(objRequest.id);
+            TestDataFactory.createSubSubReq(objRequest.id, true, '1');
+             TestDataFactory.createSubSubReq(objRequest.id, false, '1');
+            TestDataFactory.createRequestContact(objContact.id, objRecordType,'Travel, Training, Equipment, and Supplies');
+            MCFD_Attachment__c objCustomAttachment =TestDataFactory.createCustomAttachment(objRequest);
+            insert objCustomAttachment;
+            Attachment objStandarAttachment =TestDataFactory.createStandardAttachment(objCustomAttachment.Id);
+            insert objStandarAttachment;
+            MCFD_Document_Integration_Engine__c objDocumentIntegrationEngine=TestDataFactory.createDocumentIntegrationEngine(objCustomAttachment.Id, objStandarAttachment.id, objRequest.id, 'Synced','Upload', 'SpouseID1.txt' );
+            insert objDocumentIntegrationEngine;
+            MCFD_Address__c createMCFDAddress= TestDataFactory.createMCFDAddress('TestAddress');
+            insert createMCFDAddress;
+            Request__c objRequestIncome=[Select id,name,ICM_SR_Number__c,Primary_Applicant__c from Request__c where MCFD_Service_Auth_Type__c='Travel, Training, Equipment, and Supplies'  LIMIT 1];     
+            objRequestIncome.Linking_One_Time_Password__c='89141556';
+            update objRequestIncome;
+            Income__c objIncome = TestDataFactory.createIncome(objRequestIncome.Id, objRequestIncome.Primary_Applicant__c);
+            insert objIncome;
+            Reason_For_Care__c objReasonForCare = TestDataFactory.createReasonForCare(objRequestIncome.Primary_Applicant__c,objRequestIncome.id, 'Employment');
+            insert  objReasonForCare;
+            Reason_For_Care__c objReasonForCareEmployment = TestDataFactory.createReasonForCare(objRequestIncome.Primary_Applicant__c,objRequestIncome.id, 'Employment Program');
+            Reason_For_Care__c objReasonForMedicalCondition = TestDataFactory.createReasonForCare(objRequestIncome.Primary_Applicant__c,objRequestIncome.id, 'Medical Condition');
+            Reason_For_Care__c objReasonForSelfEmployment = TestDataFactory.createReasonForCare(objRequestIncome.Primary_Applicant__c,objRequestIncome.id, 'Self Employment');
+            Reason_For_Care__c objReasonForSelfNone = TestDataFactory.createReasonForCare(objRequestIncome.Primary_Applicant__c,objRequestIncome.id, 'None');
+            MCFD_Employment_Income__c objEmploymentIncome =TestDataFactory.createEmploymentIncome(objIncome.id);  
+            insert objEmploymentIncome;
+            MCFD_Self_Employment_Income__c objSelfEmploymentIncome =TestDataFactory.createSelfEmploymentIncome(objIncome.id);  
+            insert objSelfEmploymentIncome;
+            MCFD_Relationship__c objRecreateRelationship =TestDataFactory.createRelationship('Spouse',objRequest.Primary_Applicant__c, objRequest.Primary_Applicant__c, objRequest.Id);
+            insert objRecreateRelationship;
+            MCFD_Address__c objAddress =[Select id,MCFD_Address_Line_1__c from MCFD_Address__c LIMIT 1];
+            MCFD_Contact_Address__c objContactAddress= TestDataFactory.createContactAddress(objRequest.Id, objRequest.Primary_Applicant__c, 'Home Address', objAddress);
+            insert objContactAddress;
+        Test.stopTest();
+    }
+}

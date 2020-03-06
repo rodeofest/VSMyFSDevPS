@@ -1,0 +1,40 @@
+<!--
+
+Name              :		MCFD_Autism_Navigation.cmp  
+Description       :   	Navigation for the Autism. This is for testing purposed, and will probably not be used in production. 
+Created By        :  	Deloitte
+Created Date      :   	March 21st 2017
+Modification Log  :
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Developer         	Date                Description
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -          
+Laura Perry			March 21st 2017      Created component as per client request for easier QA and testing nav
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  
+
+
+-->
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global">	
+
+<ltng:require styles="{!$Resource.masterCss}" />
+
+  <div class="main-page-content"> 
+
+    <div id="topicTemplate" class="template container"> 
+		<div class="nav">
+
+			<h3>Placeholder for Quick Links - will be removed for sprint review</h3>
+			
+			<ui:outputURL value="./" label="Home" target="_self"/><br/><br/>
+			<ui:outputURL value="./style-guide" label="Style Guide" target="_self"/><br/><br/>
+
+			<ui:outputURL value="./autism-funding-dashboard" label="Autism Funding Dashboard" target="_self"/><br/>
+			<ui:outputURL value="./ccs-application" label="Full CCS Application" target="_self"/><br/><br/>
+
+			<ui:outputURL value="./autism-request-access-to-case" label="Request Access to Autism Case" target="_self"/><br/><br/>
+			<ui:outputURL value="./ccs-request-to-access-case" label="Request Access To CCS Case" target="_self"/><br/><br/>
+					
+
+		</div>
+	</div>
+</div>
+</aura:component>

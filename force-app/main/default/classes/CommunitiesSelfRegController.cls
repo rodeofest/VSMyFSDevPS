@@ -1,0 +1,86 @@
+/**
+*********************************************************************************************************
+Name            : CommunitiesSelfRegController.cls  
+Description     : An apex page controller that supports self registration of users in communities that allow self registration  
+Created By      : Deloitte
+Created Date    : 
+Modification Log:
+-------------------------------------------------------------------------------------------------------------- 
+Developer       Date        Description
+--------------------------------------------------------------------------------------------------------------                          
+
+***************************************************************************************************************
+ * 
+ */
+public class CommunitiesSelfRegController {
+
+    public String firstName {get; set;}
+    public String lastName {get; set;}
+    public String email {get; set;}
+    public String password {get; set {password = value == null ? value : value.trim(); } }
+    public String confirmPassword {get; set { confirmPassword = value == null ? value : value.trim(); } }
+    public String communityNickname {get; set { communityNickname = value == null ? value : value.trim(); } }
+    
+    // Constructor commented by Abhishek to fix CRD (Unnecessary constructor)
+    /*
+    public CommunitiesSelfRegController() {}
+    */
+    private boolean isValidPassword() {
+        return password == confirmPassword;
+    }
+
+    public PageReference registerUser() {
+    
+           // it's okay if password is null - we'll send the user a random password in that case
+        if (!isValidPassword()) {
+            ApexPages.Message msg = new ApexPages.Message(ApexPages.Severity.ERROR, Label.site.passwords_dont_match);
+            ApexPages.addMessage(msg);
+            return null;
+        }    
+        
+        String profileId = null; // To be filled in by customer.
+        // Abhishek Commented Unused Variable - roleEnum
+       //  String roleEnum = null; // To be filled in by customer.
+        String accountId = ''; // To be filled in by customer.
+        
+        String userName = email;
+
+        User usr = new User();
+        usr.Username = userName;
+        usr.Email = email;
+        usr.FirstName = firstName;
+        usr.LastName = lastName;
+        usr.CommunityNickname = communityNickname;
+        usr.ProfileId = profileId;
+        
+        String userId;
+
+        try {
+            userId = Site.createExternalUser(usr, accountId, password);
+        } catch(Site.ExternalUserCreateException ex) {
+            List<String> errors = ex.getDisplayMessages();
+            // Commented by Abhishek to fix CRD (Use SOQL as Conditional argument in for loop)
+            // for (String error : errors)  {
+            for (String error :  ex.getDisplayMessages())  {
+                ApexPages.addMessage(new ApexPages.Message(ApexPages.Severity.ERROR, error));
+            }
+            
+            // This message is used for debugging. Do not display this in the UI to the end user.
+            // It has the information around why the user creation failed.
+            System.debug(ex.getMessage());
+        }
+        
+        if (userId != null) { 
+            if (password != null && password.length() > 1) {
+                return Site.login(userName, password, ApexPages.currentPage().getParameters().get('startURL'));
+            }
+            else {
+                PageReference page = System.Page.CommunitiesSelfRegConfirm;
+                page.setRedirect(true);
+                return page;
+            }
+            }
+        
+        return null;
+    }
+}
